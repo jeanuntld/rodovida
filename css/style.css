@@ -1,0 +1,756 @@
+@font-face {
+  font-family: Avenir Next;
+  src: url(../fonts/Avenir_next.ttc);
+}
+@font-face {
+  font-family: Avenir;
+  src: url(../fonts/Avenir.ttc);
+}
+@font-face {
+  font-family: Avenir Next Condensed;
+  src: url(../fonts/Avenir_next_condensed.ttc);
+}
+html {
+  background-color: white;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+ul,
+ul li,
+ul ul li {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.tracking-form {
+  position: absolute;
+  left: -9999px;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  max-width: 90%;
+  width: 100%;
+}
+@media only screen and (min-width: 1200px) {
+  .inner {
+    max-width: 1160px;
+  }
+}
+
+.grecaptcha-badge {
+  z-index: 800;
+}
+
+.call-to-vote {
+  height: 250px;
+  margin: 44px 0;
+}
+@media only screen and (min-width: 768px) {
+  .call-to-vote {
+    margin: 82px 0;
+  }
+}
+.call-to-vote__layer {
+  background: #FFD000;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0.9;
+}
+@media only screen and (min-width: 768px) {
+  .call-to-vote__layer {
+    width: 42%;
+    background-image: url("../assets/layer.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+  }
+}
+.call-to-vote .inner {
+  background-image: url("../assets/pessoa-com-mobilidade-reduzida-mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding: 29px;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  display: flex;
+  position: relative;
+}
+@media only screen and (min-width: 768px) {
+  .call-to-vote .inner {
+    padding: 64px;
+    justify-content: initial;
+    background-image: url("../assets/pessoa-com-mobilidade-reduzida.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    width: 100%;
+  }
+}
+.call-to-vote__road {
+  position: absolute;
+  top: 39px;
+  right: 45%;
+  width: 84px;
+  height: 32px;
+  z-index: 11;
+}
+@media only screen and (min-width: 768px) {
+  .call-to-vote__road {
+    width: 160px;
+    height: 48px;
+    right: 35%;
+  }
+}
+.call-to-vote h4 {
+  color: #000;
+  text-align: right;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.64px;
+  font-size: 24px;
+  line-height: 32px;
+  max-width: 138px;
+  z-index: 12;
+}
+@media only screen and (min-width: 1024px) {
+  .call-to-vote h4 {
+    font-size: 32px;
+    line-height: 42px; /* 131.25% */
+    max-width: initial;
+  }
+}
+
+.cards {
+  margin-top: 41px;
+  position: relative;
+  transition: height 0.2s;
+}
+@media only screen and (min-width: 768px) {
+  .cards {
+    margin-top: 60px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cards {
+    margin-top: 82px;
+  }
+}
+.cards .inner {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1200px) {
+  .cards .inner {
+    flex-direction: row;
+  }
+}
+.cards__road-2 {
+  width: 48px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.cards__button {
+  width: 100%;
+  height: 22px;
+  padding: 16px 0;
+  background: #008DCB;
+  border: 0;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #FFF;
+  font-family: Avenir Next;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-transform: uppercase;
+}
+.cards__button:hover {
+  background: #006A99;
+}
+.cards__button span {
+  color: #FFD000;
+}
+.cards__confirm-modal {
+  height: 120px;
+  width: calc(100% + 8px);
+  position: absolute;
+  bottom: -140px;
+  left: 0;
+  background-color: white;
+  z-index: 100;
+  padding: 32px;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+  display: none;
+  border-radius: 4px;
+}
+.cards__success-modal {
+  position: absolute;
+  bottom: -134px;
+  left: 0;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: #FFF;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  height: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2;
+  align-items: center;
+}
+.cards__success-modal.show {
+  width: calc(100% + 8px);
+  height: 108px;
+  opacity: 1;
+  text-align: center;
+  background-color: rgba(200, 200, 200, 0.9);
+}
+.cards__success-modal span {
+  color: #191919;
+  text-align: center;
+  font-family: Avenir Next;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.cards__road {
+  width: 160px;
+  height: 48px;
+  position: absolute;
+  left: 0;
+  top: 32px;
+}
+.cards__title {
+  color: #008DCB;
+  font-family: Avenir Next;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.cards__message {
+  color: #008DCB;
+  font-family: Avenir Next;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-left: 32px;
+  margin-bottom: 8px;
+}
+.cards__scene-1, .cards__scene-2, .cards__scene-3 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 32px 0;
+  box-sizing: border-box;
+  background-color: white;
+  transition: opacity 0.4s linear;
+}
+.cards__scene-1, .cards__scene-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 10;
+}
+.cards__scene-1 {
+  opacity: 1;
+}
+.cards__scene-2 {
+  z-index: 5;
+  padding: 32px;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cards__scene-2 p {
+  color: #191919;
+  font-family: Avenir Next;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+@media only screen and (min-width: 768px) {
+  .cards__scene-2 p {
+    font-size: 16px;
+  }
+}
+.cards__scene-3 {
+  background: #008DCB;
+  padding: 32px 0;
+  border-right: 8px solid #008DCB;
+  border-bottom: 8px solid #008DCB;
+  z-index: 4;
+  opacity: 0;
+}
+.cards__scene-3 span {
+  color: #FBFBFB;
+  padding-left: 48px !important;
+}
+.cards__scene-3 h3 {
+  color: #FBFBFB !important;
+  padding-left: 48px !important;
+}
+.cards__card {
+  background-color: #008DCB;
+  height: 100%;
+  border-radius: 4px;
+  border-right: 8px solid #008DCB;
+  border-bottom: 8px solid #008DCB;
+  background: #FBFBFB;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  transition: all 0.3s linear;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+  display: block;
+  height: 422px;
+  width: 369px;
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+@media only screen and (min-width: 768px) {
+  .cards__card {
+    width: 80%;
+  }
+  .cards__card:nth-child(3) h3 {
+    width: 100% !important;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .cards__card {
+    width: 32.5%;
+    margin: 0;
+    display: block;
+  }
+}
+.cards__card.active {
+  margin-bottom: 200px;
+}
+@media only screen and (min-width: 1200px) {
+  .cards__card.active {
+    margin-bottom: 80px;
+  }
+}
+.cards__card.active .cards__scene-3 {
+  z-index: 20;
+  opacity: 1;
+}
+.cards__card.active .cards__confirm-modal {
+  display: block;
+}
+.cards__card:not(.active):hover {
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.cards__card:not(.active):hover .cards__scene-2 {
+  z-index: 15;
+  opacity: 1;
+}
+.cards__card:not(.active):hover .cards__scene-1 {
+  opacity: 0;
+}
+.cards__card h3 {
+  color: #191919;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px; /* 105% */
+  letter-spacing: -2.4px;
+  margin: 0;
+  width: 66%;
+  padding-left: 32px;
+}
+@media only screen and (min-width: 768px) {
+  .cards__card h3 {
+    font-size: 16px;
+    font-size: 40px;
+    line-height: 42px; /* 105% */
+  }
+}
+
+.hero {
+  background-image: url("../assets/fundo-mulher-sorrindo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  height: 620px;
+}
+@media only screen and (min-width: 1024px) {
+  .hero {
+    height: 418px;
+  }
+}
+.hero__road {
+  position: absolute;
+  z-index: 80;
+  object-fit: contain;
+  top: 40px;
+  width: 84px;
+  height: 32px;
+  left: -3%;
+}
+@media only screen and (min-width: 1024px) {
+  .hero__road {
+    left: -48px;
+    width: 160px;
+    height: 48px;
+  }
+}
+.hero__logo {
+  width: 196px;
+  height: 47px;
+  position: absolute;
+  bottom: 33px;
+  z-index: 80;
+  object-fit: cover;
+  right: -5%;
+}
+@media only screen and (min-width: 1024px) {
+  .hero__logo {
+    right: 0;
+  }
+}
+.hero h1 {
+  color: #000;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 900;
+  max-width: 414px;
+  margin: 0;
+  margin-bottom: 8px;
+  z-index: 99;
+  position: relative;
+  padding-left: 9%;
+  font-size: 42px;
+  line-height: 52px;
+}
+@media only screen and (min-width: 768px) {
+  .hero h1 {
+    font-size: 72px;
+    line-height: 82px;
+  }
+}
+.hero p {
+  color: #008DCB;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 500;
+  text-transform: uppercase;
+  z-index: 99;
+  position: relative;
+  padding-left: 9%;
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+@media only screen and (min-width: 768px) {
+  .hero p {
+    font-size: 22px;
+    line-height: 42px;
+  }
+}
+.hero .inner {
+  position: relative;
+}
+.hero__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-image: url("../assets/layer-mobile.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 299px;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-bottom: 64px;
+}
+@media only screen and (min-width: 768px) {
+  .hero__layer {
+    width: 650px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .hero__layer {
+    background-image: url("../assets/city-layer.png");
+    width: 67%;
+    height: 100%;
+    justify-content: flex-end;
+  }
+}
+.hero__picture {
+  background-color: #008DCB;
+  position: absolute;
+  bottom: -10px;
+  z-index: 11;
+  width: 311px;
+  height: 307px;
+  right: -3%;
+}
+@media only screen and (min-width: 1024px) {
+  .hero__picture {
+    width: 382px;
+    height: 377px;
+    right: 10%;
+  }
+}
+.hero__picture img {
+  position: absolute;
+  left: -2%;
+  top: -10px;
+  width: 97%;
+  height: 97%;
+}
+@media only screen and (min-width: 1024px) {
+  .hero__picture img {
+    width: 100%;
+    height: 100%;
+    left: -10px;
+  }
+}
+
+.result {
+  background-image: url("../assets/homem-moto.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 465px;
+  background-position: center;
+}
+.result__road {
+  position: absolute;
+  top: 94px;
+  left: 5%;
+  width: 84px;
+  height: 32px;
+}
+@media only screen and (min-width: 768px) {
+  .result__road {
+    width: 160px;
+    height: 48px;
+  }
+}
+.result__hashtag {
+  color: #FFF;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 42px;
+  letter-spacing: -1.12px;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 64px;
+  right: 5%;
+  margin: 0;
+  font-size: 16px;
+}
+@media only screen and (min-width: 768px) {
+  .result__hashtag {
+    font-size: 28px;
+    right: 10%;
+  }
+}
+.result__hashtag span {
+  color: #FFD000;
+}
+.result .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.result p {
+  color: #FFF;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.64px;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+}
+@media only screen and (min-width: 768px) {
+  .result p {
+    font-size: 16px;
+  }
+}
+.result p span {
+  color: #008DCB;
+}
+
+h2 {
+  color: #FFF;
+  font-family: Avenir Next;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -2.08px;
+  margin: 0;
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: 28px;
+}
+@media only screen and (min-width: 1024px) {
+  h2 {
+    font-size: 52px;
+    line-height: 62px;
+  }
+}
+h2 span {
+  color: #FFD000;
+}
+
+.rodovida {
+  background-color: #F7D125;
+  height: 448px;
+  width: 100%;
+  max-width: 981px;
+  margin: 0 auto;
+  position: relative;
+}
+.rodovida__logo-wrapper {
+  position: relative;
+}
+.rodovida__logo {
+  width: 167px;
+  height: 167px;
+  margin-top: 8px;
+}
+.rodovida__tips {
+  width: 286px;
+  height: 264px;
+  position: absolute;
+  top: 145px;
+  left: -60px;
+}
+.rodovida__woman, .rodovida__man {
+  width: 28%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.rodovida__woman .rodovida__main-image, .rodovida__man .rodovida__main-image {
+  width: 100%;
+  height: 100%;
+}
+.rodovida__woman {
+  left: 0;
+}
+.rodovida__woman .rodovia__description-logo {
+  width: 101px;
+  height: 90px;
+  position: absolute;
+  top: 34px;
+  right: 26px;
+}
+.rodovida__list {
+  width: 75%;
+  height: 290px;
+  background: rgba(0, 130, 203, 0.7);
+  position: absolute;
+  bottom: 12px;
+  left: 12.5%;
+  padding-top: 16px;
+}
+.rodovida__list ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 0 16px 25px;
+  list-style-type: none;
+  padding: 0;
+}
+.rodovida__list li {
+  color: white;
+  margin-bottom: 14px;
+  padding-left: 18px; /* Adjust as needed */
+  margin-left: 25px;
+  background-size: 11px; /* Adjust as needed */
+  background-repeat: no-repeat;
+  background-position: left center;
+  font-family: Avenir Next;
+  font-size: 12px;
+  font-weight: 600;
+}
+.rodovida__list li:last-child {
+  margin-bottom: 0;
+}
+.rodovida__list .wrong li {
+  background-image: url("../assets/wrong.svg");
+}
+.rodovida__list .correct li {
+  background-image: url("../assets/correct.svg");
+}
+.rodovida__man {
+  right: 0;
+}
+.rodovida__man .rodovia__description-logo {
+  width: 111;
+  height: 59px;
+  position: absolute;
+  top: 49px;
+  right: 23px;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -2,205 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>SECOM - Vote pelo trânsito</title>
+    <title>RODOVIDA</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcOR7EnAAAAAMs-Dm8Y2w3y4L6AHNJXi4sK9pLV"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.7.0.min.js"
-    crossorigin="anonymous"
-  ></script>
-  <script src="js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', showCurrentStatus);
-    function onSubmit(e) {
-        e.preventDefault();
-        const value = document.querySelector('input[name="vote"]:checked').value;
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6LcOR7EnAAAAAMs-Dm8Y2w3y4L6AHNJXi4sK9pLV', {action: 'submit'}).then(function(token) {
-            fetch('/api/vote', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                "g-recaptcha-response": token,
-                "option": document.querySelector('input[name="vote"]:checked').value
-              })
-            }).then(function(response) {
-              response.json().then((json)=>{
-                  console.log(json);
-                if(json.success) {
-                  const successModal = jQuery(jQuery(".cards__card")[value - 1]).find('.cards__success-modal')[0];
-                  jQuery(successModal).addClass("show");
-                  setTimeout(function() {
-                    jQuery(successModal).removeClass('show');
-                    jQuery(".cards").removeClass("opened");
-                  }, 3000);
-                } else {
-                  alert("Você excedeu o número de votos tente novamente em 5 minutos.");
-                }
-
-                showCurrentStatus();
-              });
-            })
-          });
-      });
-      return false;
-    };
-
-    function showCurrentStatus() {
-      fetch('/api/status').then(function(response) {
-        response.json().then((json)=>{
-          console.log(json);
-        });
-      }).then(function(data) {
-        console.log(data);
-      });
-    }
-  </script>
   </head>
   <body>
-    <!-- <form class="tracking-form" onsubmit="return false;">
-      <fieldset>
-        <legend>Opções</legend>
-        <input type="radio" name="vote" value="1" id="vote-1" />
-        <label for="vote-1">Opção 1</label>
-        <br />
-        <input type="radio" name="vote" value="2" id="vote-2" />
-        <label for="vote-2">Opção 2</label>
-        <br />
-        <input type="radio" name="vote" value="3" id="vote-3" />
-        <label for="vote-3">Opção 3</label>
-      </fieldset>
-      <button onclick="onSubmit(event)">Votar</button>
-      <pre id="return"></pre>
-      <pre id="status"></pre>
-    </form> -->
-<!-- 
-    <div class="wrapper hero">
-      <div class="inner">
-        <img class="hero__road" src="./assets/road.png" alt="figura de uma estrada">
-        <div class="hero__layer" role="img" aria-label="Imagem de uma cidade com sobreposição amarela">
-          <h1>VOTE PELO TRÂNSITO</h1>
-          <p>Escolha a mensagem</p>
-        </div>
-        <div class="hero__picture">
-          <img src="./assets/foto-mulher-sorrindo.png" alt="Foto mulher sorrindo de bicicleta">
-        </div>
-        <img class="hero__logo" src="./assets/logo-ministerio.svg" alt="Logo Ministério dos Transportes">
-      </div>
-    </div>
-
-    <div class="wrapper cards">
-      <div class="inner">
-        <div class="cards__card focus">
-          <div class="cards__scene-1">
-            <img class="cards__road" src="./assets/road.png" alt="figura de uma estrada">
-            <span class="cards__message">Mensagem 1</span>
-            <h3>A vida pede calma no trânsito</h3>
-          </div>
-          <div class="cards__scene-2">
-            <span class="cards__title">A vida pede calma no trânsito</span>
-            <p>A frase significa que, durante o tráfego ou congestionamento no trânsito, é importante manter a calma e ser paciente. Ela sugere que as situações de trânsito podem ser estressantes e desafiadoras, mas é fundamental lidar com elas de forma tranquila e serena para evitar conflitos, problemas e sinistros. A mensagem é de que a calma é necessária para garantir uma condução segura.</p>
-            <button class="cards__button btn-scene-2" aria-label="Clique aqui para ir para descrição da frase">Curti essa</button>
-          </div>
-          <div class="cards__scene-3">
-            <img class="cards__road-2" src="./assets/road-2.png" alt="figura de uma estrada na vertical">
-            <span class="cards__message">Mensagem 1</span>
-            <h3>A vida pede calma no trânsito</h3>
-          </div>
-          <div class="cards__confirm-modal">
-
-            <button class="cards__button btn-scene-3" aria-label="Clique aqui para confirmar voto">CONFIRMAR MEU VOTO</button>
-          </div>
-
-          <div class="cards__success-modal">
-            <span>
-                Obrigada! <br>
-                Voto concluído com sucesso!
-            </span>
-          </div>
-        </div>
-        <div class="cards__card">
-          <div class="cards__scene-1">
-            <img class="cards__road" src="./assets/road.png" alt="figura de uma estrada">
-            <span class="cards__message">Mensagem 2</span>
-            <h3>No trânsito, gentileza faz a diferença</h3>
-          </div>
-          <div class="cards__scene-2">
-            <span class="cards__title">No trânsito, gentileza faz a diferença</span>
-            <p>A frase incentiva as pessoas a adotarem comportamentos corteses e a considerar o bem-estar dos outros enquanto estão no trânsito, destacando que essas ações simples podem ter um impacto positivo e significativo na qualidade geral da experiência de conduzir um veículo ou andar nas ruas.</p>
-            <button class="cards__button btn-scene-2" aria-label="Clique aqui para ir para descrição da frase">Gostei mais dessa</button>
-          </div>
-          <div class="cards__scene-3">
-            <img class="cards__road-2" src="./assets/road-2.png" alt="figura de uma estrada na vertical">
-            <span class="cards__message">Mensagem 2</span>
-            <h3>No trânsito, gentileza faz a diferença</h3>
-          </div>
-          <div class="cards__confirm-modal">
-
-            <button class="cards__button btn-scene-3" aria-label="Clique aqui para confirmar voto">CONFIRMAR MEU VOTO</button>
-          </div>
-          <div class="cards__success-modal">
-            <span>
-                Obrigada! <br>
-                Voto concluído com sucesso!
-            </span>
-          </div>
-        </div>
-        <div class="cards__card">
-          <div class="cards__scene-1">
-            <img class="cards__road" src="./assets/road.png" alt="figura de uma estrada">
-            <span class="cards__message">Mensagem 3</span>
-            <h3>Paz no trânsito começa por você</h3>
-          </div>
-          <div class="cards__scene-2">
-            <span class="cards__title">Paz no trânsito começa por você</span>
-            <p>A frase destaca que a mudança começa por cada um de nós e que a paz no trânsito é uma construção coletiva, dependente das atitudes e comportamentos individuais para alcançar um objetivo comum: um trânsito mais seguro e amigável para todos.</p>
-            <button class="cards__button btn-scene-2" aria-label="Clique aqui para ir para descrição da frase">Achei melhor essa</button>
-          </div>
-          <div class="cards__scene-3">
-            <img class="cards__road-2" src="./assets/road-2.png" alt="figura de uma estrada na vertical">
-            <span class="cards__message">Mensagem 3</span>
-            <h3>Paz no trânsito começa por você</h3>
-          </div>
-          <div class="cards__confirm-modal">
-
-            <button class="cards__button btn-scene-3"  aria-label="Clique aqui para confirmar voto">CONFIRMAR MEU VOTO</button>
-          </div>
-          <div class="cards__success-modal">
-            <span>
-                Obrigada! <br>
-                Voto concluído com sucesso!
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wrapper call-to-vote">
-      <div class="inner" role="img" aria-label="Imagem de uma pessoa com mobilidade reduzida">
-        <div class="call-to-vote__layer"></div>
-        <img class="call-to-vote__road" src="./assets/road.png" alt="figura de uma estrada">
-        <h4>VOTE ATÉ O<br> DIA 6 DE SETEMBRO</h4>
-      </div>
-    </div>
-
-    <div class="wrapper result">
-      <div class="inner" role="img" aria-label="Imagem de um casal andando de moto">
-          <img class="result__road" src="./assets/road.png" alt="figura de uma estrada">
-          <h2>FALTAM <span id="countdown">XX DIAS</span> PARA O RESULTADO</h2>
-          <p><span>Clique aqui</span> e adicione ao seu calendário o dia da transmissão do resultado</p>
-          <h5 class="result__hashtag"><span>#</span>vote<span>pelo</span>transito</h5>
-      </div>
-    </div> -->
-
     <div class="wrapper rodovida">
       <div class="rodovida__woman">
-        <img class="rodovia__main-image" src="./assets/imagem-mulher-dirigindo.jpg" alt="Imagem mulher dirigindo usando o celular"/>
-        <img class="rodovia__description-logo" src="./assets/o-que-nao-fazer.svg" alt="Descrição - O que não fazer">
+        <img class="rodovida__main-image" src="./assets/imagem-mulher-dirigindo.jpg" alt="Imagem mulher dirigindo usando o celular"/>
+        <img class="rodovida__description-logo" src="./assets/o-que-nao-fazer.svg" alt="Descrição - O que não fazer">
         <div class="rodovida__list">
           <ul class="wrong">
             <li>Beber e dirigir</li>
@@ -217,8 +28,8 @@
         <img class="rodovida__tips" src="./assets/pega-essas-dicas.svg" alt="Descrição - Pega essas dicas">
       </div>
       <div class="rodovida__man">
-        <img class="rodovia__main-image" src="./assets/imagem-homem-cinto.jpg" alt="Imagem homem colocando cinto">
-        <img class="rodovia__description-logo" src="./assets/o-que-fazer.svg" alt="Descrição - O que fazer">
+        <img class="rodovida__main-image" src="./assets/imagem-homem-cinto.jpg" alt="Imagem homem colocando cinto">
+        <img class="rodovida__description-logo" src="./assets/o-que-fazer.svg" alt="Descrição - O que fazer">
         <div class="rodovida__list">
           <ul class="correct">
             <li>Manter distância<br> do carro da frente</li>

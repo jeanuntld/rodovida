@@ -204,9 +204,9 @@ h2 {
     li {
       color: white;
       margin-bottom: 14px;
-      padding-left: 18px; /* Adjust as needed */
+      padding-left: 24px; /* Adjust as needed */
       margin-left: 12px;
-      background-size: 11px; /* Adjust as needed */
+      background-size: 15px; /* Adjust as needed */
       background-repeat: no-repeat;
       background-position: left 15%;
       font-family: Avenir Next;
@@ -225,13 +225,13 @@ h2 {
 
     .wrong {
       li {
-        background-image: url('../assets/wrong.svg');
+        background-image: url('../assets/wrong.png');
       }
     }
 
     .correct {
       li {
-        background-image: url('../assets/correct.svg');
+        background-image: url('../assets/correct.png');
       }
     }
   }

@@ -209,6 +209,7 @@ h2 span {
   font-family: Avenir Next;
   font-size: 10px;
   font-weight: 600;
+  min-height: 20px;
 }
 @media only screen and (min-width: 768px) {
   .rodovida__list li {

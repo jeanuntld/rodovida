@@ -242,4 +242,19 @@ h2 span {
   }
 }
 
+.rodovida-iframe {
+  height: 700px;
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .rodovida-iframe {
+    height: 899px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .rodovida-iframe {
+    height: 448px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

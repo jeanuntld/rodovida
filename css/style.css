@@ -13,13 +13,13 @@
 html {
   background-color: white;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
 }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
   margin: 0;
